@@ -10,12 +10,14 @@ public:
     queue& operator=( const queue& copy );
     bool enqueue( int element );
     int dequeue( int element );
+    class iterator;
+
 
 private:
-    int head;
-    int tail;
-    int* array; 
-
+    int m_head;
+    int m_tail;
+    int* mp_array; 
+    int m_size;
 };
 
 
