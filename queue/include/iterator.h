@@ -5,11 +5,14 @@ class queue::iterator
 {
 
 public:
-    iterator( int* arr );
+    iterator( int* arr, int size );
     void operator++();
     int operator*();
 
 private:
-    int current;
+    int m_currentIndex;
+    int m_size;
+    int* mp_arr;
+    
 
 };

@@ -1,18 +1,23 @@
 #include "../include/iterator.h"
 
 
-queue::iterator::iterator( int* arr )
+queue::iterator::iterator( int* arr, int size )
 {
-    current = 0;
+    m_currentIndex = 0;
+    m_size = size;
+    mp_arr = arr;
 }
 
 void queue::iterator::operator++()
 {
-    
+    if( m_currentIndex != m_size )
+    {
+        m_currentIndex++;
+    }    
 }
 
-queue queue::iterator::operator*()
+int queue::iterator::operator*()
 {
-    return arr[i];
+    return mp_arr[m_currentIndex];
 }
 
