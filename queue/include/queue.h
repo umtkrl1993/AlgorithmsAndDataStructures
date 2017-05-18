@@ -7,11 +7,10 @@ public:
     queue( int size );
     ~queue();
     queue( const queue* copy );
-    queue& operator=( const queue& copy );
+    queue operator=( const queue& copy );
     bool enqueue( int element );
     int dequeue( int element );
     class iterator;
-
 
 private:
     int m_head;

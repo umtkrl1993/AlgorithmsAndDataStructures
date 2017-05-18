@@ -1,21 +1,24 @@
-#include "queue.h"
-
+#include "../include/queue.h"
 
 queue::queue( int size ) :
     m_size( size )
 {
-    arr = new int[size];
+    mp_arr = new int[size];
 }
 
 queue::~queue()
 {
-    delete arr;
+    delete mp_arr;
 }
 
 queue::queue( const queue& copy )
 {
+    m_size = copy.m_size;
+    mp_arr = new int[m_size];
 
 }
+
+queue
 
 
 
