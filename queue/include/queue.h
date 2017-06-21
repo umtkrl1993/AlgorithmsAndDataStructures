@@ -14,11 +14,13 @@ public:
     bool enqueue( int element );
     int dequeue();
     class iterator;
+    iterator begin();
+    iterator end();
 
 private:
     int m_head;
     int m_tail;
-    int* mp_array; 
+    int* mp_arr; 
     int m_size;
 };
 

@@ -1,5 +1,7 @@
 #include "../include/iterator.h"
 
+namespace DataStructures
+{
 
 queue::iterator::iterator( int* arr, int size )
 {
@@ -21,3 +23,4 @@ int queue::iterator::operator*()
     return mp_arr[m_currentIndex];
 }
 
+}

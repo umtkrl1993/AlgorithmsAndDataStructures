@@ -9,7 +9,7 @@ queue::iterator it = que.begin();
 int element = (*it);
 printf(" First element in que is %d \n ", element ):
 
-
+queue q1 = 
 
 
 
