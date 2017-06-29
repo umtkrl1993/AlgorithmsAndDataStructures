@@ -1,5 +1,5 @@
-#include "../include/queue.h"
-#include "../include/iterator.h"
+#include "queue.h"
+#include "iterator.h"
 
 namespace DataStructures
 {
