@@ -82,10 +82,17 @@ int main()
 	playerTeamHash.insert( "teo", "cska moscow" );
 	playerTeamHash.insert( "decolo", "cska moscow" );
 	playerTeamHash.insert( "ayon", "real madrid" );
+	playerTeamHash.insert( "yaon", "real madrid" );
 
 	std::string value = playerTeamHash.lookup( "ekpe" );
 
 	std::cout << " ekpe value is " << value << std::endl;
+
+	std::cout << " there should be a collision for ayon and yaon \n";
+
+	value = playerTeamHash.lookup( "yaon" );
+
+	std::cout << "yaon value is " << value << std::endl;
 	
 	return 0;
 }
