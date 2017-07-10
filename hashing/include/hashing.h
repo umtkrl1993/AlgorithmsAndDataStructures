@@ -18,20 +18,34 @@ typedef struct element
 
 }element;
 
+//Should I call destructor of struct element because it has not dynamically allocated memory !!
+typedef struct hashNode
+{
+	~hashNode()
+	{
+		delete e;
+	}
+
+	hashNode*next;
+	element* e;
+
+}hashNode;
+
 class hashing
 {
 
 	public:
+	hashing( int p_size );
 	virtual void insert( const std::string& key, const std::string& value );
 	virtual std::string lookup( const std::string& key );
+	virtual int getIndex( const std::string& hashFactor );
 
 	private:
-	std::vector< std::vector< element > > hashTable;
 	
-
+	hashNode** m_hashTable;
+	int m_size;
 };
 
 }
-
 
 #endif

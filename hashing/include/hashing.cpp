@@ -1,12 +1,22 @@
 #include "hashing.h"
 #include<stdio.h>
 
-namespace 
+namespace DataStructures
 {
 
-const int HASH_FACTOR = 71;
+hashing::hashing( int p_size )
+{
+	m_size = p_size;
+	hashTable = new hashTable*[ m_size ];
 
-int getIndex( const std::string& key )
+	for( int i = 0; i < m_size; i++ )
+	{
+		hashTable[i] = NULL;
+	}
+
+}
+
+int hashing::getIndex( const std::string& key )
 {
 	int total = 0;
 	for( int i = 0; i < key.size(); ++i )
@@ -14,28 +24,15 @@ int getIndex( const std::string& key )
 		total += int( key.at( i ) );
 	}
 
-	int index = total % HASH_FACTOR;
+	int index = total % m_size;
 
 	return index;
 }
-}
-namespace DataStructures
-{
 
 std::string hashing::lookup( const std::string& key )
 {
 	
 	int index = getIndex ( key );
-	std::vector< element > chain = hashTable[index];
-	std::vector< element >::iterator it = chain.begin();
-
-	for( ; it != chain.end(); ++it )
-	{
-		if ( ( *it ).key == key )
-		{
-			return ( *it ).value;
-		}
-	}
 
 	return " ";
 }
@@ -44,9 +41,10 @@ void hashing::insert( const std::string& key, const std::string& value )
 {
 	int index = getIndex( key );
 	
-	printf( "returned index value is %d \n", index );
-
-	hashTable[index].push_back( element( key, value ) );
+	if( hashTable[index] == NULL )
+	{
+		
+	} 
 }
 
 }
