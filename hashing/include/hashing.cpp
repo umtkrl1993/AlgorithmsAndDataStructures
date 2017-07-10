@@ -17,6 +17,26 @@ hashing::hashing( int p_size )
 
 }
 
+hashing::~hashing()
+{
+	for( int i = 0; i < m_size; ++i )
+	{
+		hashNode* deletableNode = mp_hashTable[i];
+		hashNode* currentNode = deletableNode;	
+
+		while( ( currentNode != NULL ) && ( currentNode -> mp_next != NULL ) )
+		{
+			currentNode = deletableNode->mp_next;
+			delete deletableNode;
+		}	
+		
+		delete currentNode;
+	}
+
+	delete[] mp_hashTable;
+
+}
+
 int hashing::getIndex( const std::string& key )
 {
 	int total = 0;
@@ -26,6 +46,8 @@ int hashing::getIndex( const std::string& key )
 	}
 
 	int index = ( total % m_size );
+
+	printf( " Key is %s and its calculated hash is %d \n", key.c_str(), index );
 
 	return index;
 }

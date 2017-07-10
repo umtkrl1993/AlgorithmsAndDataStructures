@@ -1,4 +1,4 @@
 
 
 target : hashing.cpp
-	g++ hashing.cpp -o exe
+	g++ -g hashing.cpp -o exe

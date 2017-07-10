@@ -44,6 +44,7 @@ class hashing
 
 	public:
 		hashing( int p_size );
+		~hashing();
 		virtual void insert( const std::string& key, const std::string& value );
 		virtual std::string lookup( const std::string& key );
 
