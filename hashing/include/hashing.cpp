@@ -1,5 +1,6 @@
 #include "hashing.h"
 #include<stdio.h>
+#include<iostream>
 
 namespace DataStructures
 {
@@ -7,11 +8,11 @@ namespace DataStructures
 hashing::hashing( int p_size )
 {
 	m_size = p_size;
-	hashTable = new hashTable*[ m_size ];
+	mp_hashTable = new hashNode*[ m_size ];
 
 	for( int i = 0; i < m_size; i++ )
 	{
-		hashTable[i] = NULL;
+		mp_hashTable[i] = NULL;
 	}
 
 }
@@ -24,27 +25,50 @@ int hashing::getIndex( const std::string& key )
 		total += int( key.at( i ) );
 	}
 
-	int index = total % m_size;
+	int index = ( total % m_size );
 
 	return index;
 }
 
 std::string hashing::lookup( const std::string& key )
 {
-	
 	int index = getIndex ( key );
+	hashNode* target = mp_hashTable[index];
+	
+	while( target->mp_element->m_key != key )
+	{	
+		target = target->mp_next;
+	}
 
-	return " ";
+	std::string value = target->mp_element->m_value;
+
+	return value;
 }
 
 void hashing::insert( const std::string& key, const std::string& value )
 {
 	int index = getIndex( key );
-	
-	if( hashTable[index] == NULL )
+
+	element* newElement = new element( key, value );	
+ 	hashNode* newNode = new hashNode( newElement );
+
+	if( mp_hashTable[index] == NULL )
 	{
-		
-	} 
+		mp_hashTable[index] = newNode;
+	}
+	else
+	{
+		hashNode* currentNode = mp_hashTable[index];
+		hashNode* previousNode;
+
+		while( currentNode != NULL )
+		{
+			previousNode = currentNode;
+			currentNode = currentNode->mp_next;
+		}
+
+		previousNode->mp_next = newNode;
+	}
 }
 
 }
@@ -52,11 +76,16 @@ void hashing::insert( const std::string& key, const std::string& value )
 
 int main()
 {
+	
+	DataStructures::hashing playerTeamHash(  11 );
+	playerTeamHash.insert( "ekpe", "fenerbahce" );
+	playerTeamHash.insert( "teo", "cska moscow" );
+	playerTeamHash.insert( "decolo", "cska moscow" );
+	playerTeamHash.insert( "ayon", "real madrid" );
 
-	DataStructures::hashing h;
+	std::string value = playerTeamHash.lookup( "ekpe" );
 
-	h.insert( "umit" , "Computer Engineer" );
-	h.insert( "aysegul",  "Electronic Engineer" );
-
+	std::cout << " ekpe value is " << value << std::endl;
+	
 	return 0;
 }
