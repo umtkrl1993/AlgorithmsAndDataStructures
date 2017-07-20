@@ -131,7 +131,7 @@ std::string binaryTree::search( int key ) const
 
 
 
-int main()
+int main( int argc, char* argv[] )
 {
 
 	binaryTree b;
