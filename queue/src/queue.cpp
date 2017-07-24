@@ -33,14 +33,14 @@ queue& queue::operator=( const queue& copy )
     m_tail = copy.m_tail;
 }
 
-queue::iterator queue::begin()
+queue::iterator queue::begin() const
 {
-    return queue::iterator( mp_arr, m_size );
+    return queue::iterator( mp_arr, m_size, 0 );
 }
 
-queue::iterator queue::end()
+queue::iterator queue::end() const
 {
-    return queue::iterator( mp_arr, m_size );
+    return queue::iterator( mp_arr, m_size, m_size-1 );
 }
 
 bool queue::enqueue( int element )

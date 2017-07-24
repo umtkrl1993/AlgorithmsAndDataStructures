@@ -13,9 +13,10 @@ public:
     queue& operator=( const queue& copy );
     bool enqueue( int element );
     int dequeue();
+	int size() const { return m_size; }
     class iterator;
-    iterator begin();
-    iterator end();
+    iterator begin() const;
+    iterator end() const;
 
 private:
     int m_head;
