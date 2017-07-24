@@ -1,4 +1,4 @@
-#include "../include/iterator.h"
+#include "iterator.h"
 
 namespace DataStructures
 {

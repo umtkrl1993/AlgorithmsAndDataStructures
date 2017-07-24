@@ -1,6 +1,6 @@
 CC=g++
 CFLAGS=-c
-INCLUDE_PATH=-I/home/umit/Desktop/AlgorithmsAndDataStructures/queue/include/
+INCLUDE_PATH=-I./include/
 OBJECTS = queue.o iterator.o
 
 VPATH = src:tests
