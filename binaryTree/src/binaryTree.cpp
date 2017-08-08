@@ -111,6 +111,40 @@ void binaryTree::insert( int key, const std::string& value )
 	}
 }
 
+// it is assumed that the keys are unique
+void binaryTree::deleteElement( int key )
+{
+		if( root == NULL )
+		{
+			std::cout << "Can not delete tree is empty\n";
+			return;
+		}
+
+
+		treeNode* current = root;
+		treeNode* parent = NULL;
+
+		while( current->key != key && current != NULL )
+		{
+			parent = current;
+
+			if( current->key < key )
+			{
+				current = current->rightChild;
+			}
+			else
+			{
+				current = current->leftChild;
+			}
+		}
+
+		if( current != NULL )
+		{
+
+		}
+
+
+}
 
 std::string binaryTree::search( int key ) const
 {

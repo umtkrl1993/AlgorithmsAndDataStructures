@@ -9,7 +9,9 @@ class binaryTree
 		binaryTree();
 		~binaryTree();
 		void insert( int key, const std::string& value );
+		void deleteElement( int key);
 		std::string search( int key ) const;
+
 		const treeNode* getRoot() const { return root; }	
 		int size() const { return m_size; }
 	private:
