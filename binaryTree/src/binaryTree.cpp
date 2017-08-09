@@ -25,6 +25,8 @@ treeNode* rightChild;
 
 namespace 
 {
+
+	typedef treeNode* node;
 	
 	void inorderWalk( const treeNode* node ) 
 	{
@@ -49,18 +51,71 @@ namespace
 		std::cout << "key is " << node->key << " value is " << node->value<< std::endl;
 	}
 
-	void inorderWalkNonRecursive( const treeNode* node )
+	void iterativeInorderTreeWalk( const treeNode* node )
 	{
 
 	}
 
-}
+	inline const treeNode* findMin( const treeNode* searchRoot )
+	{
+		node current = root;
+		node parent = NULL;
 
+		while( current != NULL )
+		{
+			parent = current;
+			current = current->leftChild;
+		}
+
+		return parent;
+
+	}
+
+	inline const treeNode* findMax( const treeNode* searchRoot )
+	{
+		node current = root;
+		node parent = NULL;
+
+		while( current != NULL )
+		{
+			parent = current;
+			current = current->rightChild;
+		}
+
+		return parent;
+	}
+
+	//finds the largest node smaller than searchRoot
+	inline const treeNode* successor( const treeNode* searchRoot )
+	{
+
+		return NULL;
+	}
+
+	//finds the smallest node larger than searchRoot
+	inline const treeNode* predecessor( const treeNode* searchRoot )
+	{
+
+		return NULL;
+	}
+
+}
 
 binaryTree::binaryTree()
 {
 	root = NULL;
 	m_size = 0;
+}
+
+binaryTree::binaryTree( const binaryTree& copyTree )
+{
+
+}
+
+binaryTree& binaryTree::operator=( const binaryTree& copyTree )
+{
+
+	return *this;
 }
 
 binaryTree::~binaryTree()
@@ -69,19 +124,29 @@ binaryTree::~binaryTree()
 
 }
 
+void binaryTree::inorderTreeWalk() const
+{
+	inorderWalk( mp_root );
+}
+
+void binaryTree::postorderTreeWalk() const
+{
+	postorderWalk( mp_root );
+}
+
 void binaryTree::insert( int key, const std::string& value )
 {
 
-	if( root == NULL )
+	if( mp_root == NULL )
 	{
 		treeNode* newNode = new treeNode( key, value );
-		root = newNode;
+		mp_root = newNode;
 		m_size++;
 	}
 	else
 	{
 		treeNode* newNode = new treeNode( key, value );
-		treeNode* ptr = root;
+		treeNode* ptr = mp_root;
 		treeNode* parent;
 
 		while ( ptr != NULL )
@@ -114,14 +179,14 @@ void binaryTree::insert( int key, const std::string& value )
 // it is assumed that the keys are unique
 void binaryTree::deleteElement( int key )
 {
-		if( root == NULL )
+		if( mp_root == NULL )
 		{
 			std::cout << "Can not delete tree is empty\n";
 			return;
 		}
 
 
-		treeNode* current = root;
+		treeNode* current = mp_root;
 		treeNode* parent = NULL;
 
 		while( current->key != key && current != NULL )
@@ -148,7 +213,7 @@ void binaryTree::deleteElement( int key )
 
 std::string binaryTree::search( int key ) const
 {
-	treeNode* node = root;
+	treeNode* node = mp_root;
 
 	while( node->key != key )
 	{
