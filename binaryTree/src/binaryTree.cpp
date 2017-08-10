@@ -1,5 +1,6 @@
 #include "binaryTree.h"
 #include <iostream>
+#include <stdexcept>
 
 typedef struct treeNode
 {
@@ -85,17 +86,33 @@ namespace
 		return parent;
 	}
 
-	//finds the largest node smaller than searchRoot
+	//finds the smallest key larger than searchRoot
 	inline const treeNode* successor( const treeNode* searchRoot )
 	{
+			try
+			{
+				if( searchRoot == NULL )
+						throw std::runtime_error( "null pointer exception")
+
+				treeNode* current = searchRoot->rightChild;
+
+				while( current != NULL )
+				{
+
+				}
+			}
+
+			catch( std::runtime_error& e )
+			{
+			
+			}
 
 		return NULL;
 	}
 
-	//finds the smallest node larger than searchRoot
+	//finds the largest key smaller than searchRoot
 	inline const treeNode* predecessor( const treeNode* searchRoot )
 	{
-
 		return NULL;
 	}
 
