@@ -5,24 +5,31 @@
 typedef struct treeNode
 {
 
-treeNode( int pkey, const std::string& pvalue )
-{
-	key = pkey;
-	value = pvalue;
-	parent = NULL;
-	leftChild = NULL;
-	rightChild = NULL;
-}
+	treeNode( int pkey, const std::string& pvalue )
+	{
+		key = pkey;
+		value = pvalue;
+		parent = NULL;
+		leftChild = NULL;
+		rightChild = NULL;
+	}
 
-int key;
-std::string value;
-treeNode* parent;
-treeNode* leftChild;
-treeNode* rightChild;
+	
+	int key;
+	std::string value;
+	treeNode* parent;
+	treeNode* leftChild;
+	treeNode* rightChild;
 
 }treeNode;
 
 
+
+
+std::ostream& operator<<( std::ostream& out, const treeNode& node )
+{
+
+}
 
 namespace 
 {
@@ -57,9 +64,9 @@ namespace
 
 	}
 
-	inline const treeNode* findMin( const treeNode* searchRoot )
+	inline treeNode* findMin( treeNode* searchRoot )
 	{
-		node current = root;
+		node current = searchRoot;
 		node parent = NULL;
 
 		while( current != NULL )
@@ -72,9 +79,9 @@ namespace
 
 	}
 
-	inline const treeNode* findMax( const treeNode* searchRoot )
+	inline treeNode* findMax( treeNode* searchRoot )
 	{
-		node current = root;
+		node current = searchRoot;
 		node parent = NULL;
 
 		while( current != NULL )
@@ -87,31 +94,28 @@ namespace
 	}
 
 	//finds the smallest key larger than searchRoot
-	inline const treeNode* successor( const treeNode* searchRoot )
+	inline treeNode* successor( const treeNode* searchRoot )
 	{
 			try
 			{
 				if( searchRoot == NULL )
-						throw std::runtime_error( "null pointer exception")
+						throw std::runtime_error( "null pointer exception");
 
 				treeNode* current = searchRoot->rightChild;
 
-				while( current != NULL )
-				{
-
-				}
+				return findMin( current );
 			}
 
 			catch( std::runtime_error& e )
 			{
-			
+				std::cerr<< "Null pointer exception"<< std::endl;
 			}
 
 		return NULL;
 	}
 
 	//finds the largest key smaller than searchRoot
-	inline const treeNode* predecessor( const treeNode* searchRoot )
+	inline treeNode* predecessor( const treeNode* searchRoot )
 	{
 		return NULL;
 	}
@@ -120,7 +124,7 @@ namespace
 
 binaryTree::binaryTree()
 {
-	root = NULL;
+	mp_root = NULL;
 	m_size = 0;
 }
 
@@ -178,7 +182,7 @@ void binaryTree::insert( int key, const std::string& value )
 				ptr = ptr->rightChild;
 			}
 		}
-		
+
 		if( parent->key > key )
 		{
 			parent->leftChild = newNode;
@@ -250,6 +254,7 @@ std::string binaryTree::search( int key ) const
 int main( int argc, char* argv[] )
 {
 
+
 	binaryTree b;
 	b.insert( 20, "umit aykurt" );
 	b.insert( 40, "berke aykurt" );
@@ -257,17 +262,26 @@ int main( int argc, char* argv[] )
 	b.insert( 59, "burak aykurt" );
 	b.insert( 10, "ekpe udoh" );
 	b.insert( 14, "jan vesely" );
-
-
-	const treeNode* root = b.getRoot();
-	std::cout << "---------------------------------------Inorder Walk Results-----------------------------------------\n";
-
-	inorderWalk( root );
-
-
-	std::cout << "---------------------------------------Postorder Walk Results---------------------------------------\n";
 	
-	postorderWalk( root );
+	treeNode* root = b.getRoot();
+	
+	treeNode* max = findMax( root );
+	treeNode* min = findMin( root );
+    treeNode* succ = successor( root );
+	std::cout << "Max key  is " << max->key << std::endl;
+    std::cout << "Min key  is " << min->key << std::endl;
+    std::cout << "Successor of 20 is " << succ->key << std::endl;
+
+// 	std::cout << "---------------------------------------Inorder Walk Results-----------------------------------------\n";
+// 
+// 	b.inorderTreeWalk();
+// 
+// 
+// 	std::cout << "---------------------------------------Postorder Walk Results---------------------------------------\n";
+// 	
+// 	b.postorderTreeWalk();
+
+
 
 
 	

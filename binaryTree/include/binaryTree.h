@@ -17,7 +17,7 @@ class binaryTree
 
 		void inorderTreeWalk() const ;
 		void postorderTreeWalk() const;
-		const treeNode* getRoot() const { return root; }	
+		treeNode* getRoot() const { return mp_root; }
 		int size() const { return m_size; }
 	private:
 		treeNode* mp_root;
