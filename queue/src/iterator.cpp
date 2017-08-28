@@ -3,16 +3,16 @@
 namespace DataStructures
 {
 
-queue::iterator::iterator( int* arr, int size, int setIndex )
+queue::iterator::iterator( queue& que, int setIndex )
+: m_parent( que )
 {
     m_currentIndex = setIndex;
-    m_size = size;
-    mp_arr = arr;
 }
 
+// Should return iterator object in case of it = it++;
 void queue::iterator::operator++()
 {
-    if( m_currentIndex != m_size )
+    if( m_currentIndex != m_parent.m_size )
     {
         m_currentIndex++;
     }    
@@ -20,15 +20,12 @@ void queue::iterator::operator++()
 
 int queue::iterator::operator*()
 {
-    return mp_arr[m_currentIndex];
+    return m_parent.mp_arr[m_currentIndex];
 }
 
+// Do NOT use sizes to compare iterators use data comparision
 bool queue::iterator::operator ==( const queue::iterator& it2 )
 {
-	if( m_size != it2.m_size )
-	{
-		return false;
-	}
 
 	if( m_currentIndex != it2.m_currentIndex )
 	{

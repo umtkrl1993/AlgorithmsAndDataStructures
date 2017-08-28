@@ -13,16 +13,18 @@ public:
     queue& operator=( const queue& copy );
     bool enqueue( int element );
     int dequeue();
-	int size() const { return m_size; }
+	int size() const { return m_maxSize; }
+	int currentSize() const { return m_currentSize; }
     class iterator;
-    iterator begin() const;
-    iterator end() const;
+    iterator begin();
+    iterator end();
 
 private:
     int m_head;
     int m_tail;
-    int* mp_arr; 
-    int m_size;
+    int* mp_arr;
+	int m_currentSize;
+    int m_maxSize;
 };
 
 }

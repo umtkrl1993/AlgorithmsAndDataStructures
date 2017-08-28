@@ -6,7 +6,7 @@ class queue::iterator
 {
 
 public:
-    iterator( int* arr, int size, int setIndex );
+    iterator( queue& que ,int setIndex );
     void operator++();
     int operator*();
 	bool operator ==( const iterator& it2 );
@@ -14,8 +14,7 @@ public:
 
 private:
     int m_currentIndex;
-    int m_size;
-    int* mp_arr;
+	queue m_parent;
 
 };
 }
