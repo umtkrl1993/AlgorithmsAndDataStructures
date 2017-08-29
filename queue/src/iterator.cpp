@@ -12,7 +12,7 @@ queue::iterator::iterator( queue& que, int setIndex )
 // Should return iterator object in case of it = it++;
 void queue::iterator::operator++()
 {
-    if( m_currentIndex != m_parent.m_size )
+    if( m_currentIndex != m_parent.m_maxSize )
     {
         m_currentIndex++;
     }    
