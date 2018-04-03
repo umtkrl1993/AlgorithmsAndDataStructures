@@ -19,9 +19,12 @@ class Graph{
 
 		}
 
-		void addEdge( int src, int dst ){
+		void addEdge( std::string src, std::string dst, int weight ){
 
-			graphVertex* src_vertex = mp_graph[src];
+			int src_id = m_vertice_map[src];
+			int dst_id = m_vertice_map[dst];
+
+			graphVertex* src_vertex = mp_graph[src_id];
 
 			graphVertex* current = src_vertex->next;
 			graphVertex* pre = current;
@@ -33,9 +36,9 @@ class Graph{
 			}
 
 			graphVertex* new_vertex = new graphVertex;
-
+			new_vertex->weight = weight;
 			new_vertex->next = nullptr;
-			new_vertex->dest = dst;
+			new_vertex->dest = dst_id;
 
 			if( pre == nullptr ){
 
@@ -125,23 +128,13 @@ class Graph{
 		typedef struct graphVertex{
 
 			struct graphVertex* next;
+			int weight;
+			int dest;
 
 			graphVertex(){
-
 				next = nullptr;
+				weight = 0;
 			}
-
-			/**
-			graphVertex& operator=( const graphVertex& copy_vertex ){
-
-				this->next = nullptr;
-				this->dest = copy_vertex.dest;
-
-				return *this;
-			}	
-			*/
-				
-			int dest;
 
 		}graphVertex;
 
