@@ -1,4 +1,6 @@
-#include<iostream>
+#include <iostream>
+#include <map>
+#include <string>
 
 class Graph{
 
@@ -7,6 +9,7 @@ class Graph{
 		Graph( int vertex_number ){
 
 			this->m_vertex_number = vertex_number;
+			this->m_vertice_index = 0;
 			initializeGraph();
 		}
 
@@ -45,12 +48,17 @@ class Graph{
 
 		}
 		
-		void addVertex(){
+		void addVertex( std::string vertice_name ){
 
-			m_vertex_number++;
-			expandMemory();		
+			std::map< std::string , int >::iterator it = m_vertice_map.find( vertice_name );
 
-			
+			if( it == m_vertice_map.end() ){
+				m_vertice_map[vertice_name] = m_vertice_index++;
+			}
+			else{
+				m_vertice_map.erase( it );
+			}
+
 		}
 
 		void printGraph(){
@@ -64,7 +72,26 @@ class Graph{
 					current = current->next;
 				}
 
-				std::cout << "-------------------------------------------------" << std::endl;
+			}
+
+		}
+
+		void printVertices(){
+
+			for( std::map< std::string, int >:: iterator it = m_vertice_map.begin(); it != m_vertice_map.end(); it++ ){
+				std::cout << it->first << '\n';
+			}
+
+		}
+
+		void printNeigh( int node ){
+
+			graphVertex* current = mp_graph[node]->next;
+
+			while( current != nullptr ){
+		
+					std::cout << current->dest << '\n';
+					current = current->next;
 
 			}
 
@@ -121,6 +148,8 @@ class Graph{
 		int m_vertex_number;
 
 		graphVertex** mp_graph;
+		std::map< std::string, int > m_vertice_map;
+		int m_vertice_index;
 
 };
 
@@ -130,19 +159,35 @@ int main(){
 
 	Graph g( 10 );
 
-	g.addEdge( 0 , 3 );
-	g.addEdge( 0, 4 );
-	g.addEdge( 0, 5 );
-	g.addEdge( 0, 6 );
-	g.addEdge( 1, 2 );
-	g.addEdge( 2, 4 );
-	g.addEdge( 3, 9 );
-	g.addEdge( 4, 8 );
-	g.addEdge( 4, 6 );
+	g.addVertex( "Ankara" );
+	g.addVertex( "Istanbul" );
+	g.addVertex( "Izmir" );
+	g.addVertex( "Adana" );
+	g.addVertex( "Antalya");
+
+	g.printVertices();
+
+
+//
+//	g.addEdge( 0 , 3 );
+//	g.addEdge( 0, 4 );
+//	g.addEdge( 0, 5 );
+//	g.addEdge( 0, 6 );
+//	g.addEdge( 1, 2 );
+//	g.addEdge( 2, 4 );
+//	g.addEdge( 3, 9 );
+//	g.addEdge( 4, 8 );
+//	g.addEdge( 4, 6 );
+//	g.addEdge( 6, 0);
+//	g.addEdge( 6,1);
+//	g.addEdge( 6,5);
+//	g.addEdge( 6,6);
+
+	g.printNeigh( 6 );
 //g.addEdge( 5, 7 );
 
 
-	g.printGraph();
+	//g.printGraph();
 	
 	
 
