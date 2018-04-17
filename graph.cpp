@@ -1,6 +1,7 @@
 #include <iostream>
 #include <map>
 #include <string>
+#include <queue>
 
 class Graph{
 
@@ -90,6 +91,45 @@ class Graph{
 
 		}
 
+
+		void bfs( int start ){
+			int discovered[m_vertice_number] = {0};
+			std::queue< graphVertex* > bfs_que;
+
+			graphVertex* current = mp_graph[start]->next;
+
+
+			while( current != nullptr ){
+
+				bfs_que.push( current );
+				current = current->next;
+			}
+
+			//bfs_que.push( current );
+
+			discovered[start] = 1;
+
+			while( !bfs_que.empty() ){
+
+				graphVertex* current = bfs_que.front();
+				discovered[current->dest] = 1;
+				std::cout << "from" << m_id_map_to_vertice[start] << "to" << m_id_map_to_vertice[current->dest] << std::endl;
+				bfs_que.pop();
+
+				//get adjacent vertice
+				current = mp_graph[current->dest]->next;
+
+				//add adjacent nodes of current to queue
+				while( current != nullptr ){
+					bfs_que.push( current );
+					current = current->next;
+
+				}
+
+			}
+
+		}
+
 		void printNeigh( int node ){
 
 			graphVertex* current = mp_graph[node]->next;
@@ -138,17 +178,6 @@ class Graph{
 			}
 		}
 
-		void expandMemory(){
-
-			graphVertex** temp = nullptr;
-
-			for( int i = 0; i < m_vertice_number; i++ ){
-
-
-
-			}
-
-		}
 
 
 };
@@ -164,6 +193,8 @@ int main(){
 	g.addVertex( "Izmir" );
 	g.addVertex( "Adana" );
 	g.addVertex( "Antalya");
+	g.addVertex( "Erzurum");
+	g.addVertex( "Sivas");
 
 	g.addEdge( "Ankara", "Istanbul", 500 );
 	g.addEdge( "Ankara", "Izmir", 800 );
@@ -171,6 +202,9 @@ int main(){
 	g.addEdge( "Izmir", "Istanbul", 450 );
 	g.addEdge( "Izmir", "Antalya", 250 );
 	g.addEdge( "Istanbul", "Antalya", 600);
+	g.addEdge( "Istanbul", "Erzurum", 880 );
+
+	g.bfs( 1 );
 
 
 
