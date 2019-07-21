@@ -1,0 +1,7 @@
+hi this is a test
+I will test if string matching
+algorithm works
+first I will try boyer-moore
+then do test with kmp
+hey algorithm
+how are you algorith
